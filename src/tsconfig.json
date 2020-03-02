@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "declaration": true,
+    "outDir": "./dist",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": false,
+    "jsx": "react",
+    "lib": ["es6", "es7"],
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*", "AppNotification.tsx", "index.ts", "../types.ts", "AppNotificationUI"]
+}
