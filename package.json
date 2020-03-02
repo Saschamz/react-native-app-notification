@@ -1,0 +1,21 @@
+{
+  "name": "react-native-app-notification",
+  "version": "1.0.0",
+  "description": "In-app custom notifications for React-Native",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": ["notification", "react-native", "toast"],
+  "author": "Sascha Ringström",
+  "license": "ISC",
+  "dependencies": {
+    "styled-components": "*",
+    "styled-native-kit": "*",
+    "@redmindab/react-hooks": "*"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  }
+}

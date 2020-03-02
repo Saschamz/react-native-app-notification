@@ -15,5 +15,5 @@
     "strictNullChecks": false,
     "resolveJsonModule": true
   },
-  "include": ["src/**/*", "AppNotification.tsx", "index.ts", "../types.ts", "AppNotificationUI"]
+  "include": ["src/**/*"]
 }
