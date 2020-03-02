@@ -5,7 +5,7 @@ import {
   NotificationQueueItem,
   ShowNotificationOptions,
   NotificationOptions
-} from '../types'
+} from './types'
 
 type OwnProps = {
   contentContainerStyle?: StyleProp<ViewStyle>

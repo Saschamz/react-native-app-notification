@@ -10,7 +10,7 @@ import {
 import { useLayout } from '@redmindab/react-hooks'
 import { Card, Title, Message, TextContainer, Circle } from './styled'
 import { SlideDownFadeIn, Shrink } from './animations'
-import { NotificationQueueItem } from '../../types'
+import { NotificationQueueItem } from '../types'
 
 type OwnProps = {
   animated?: boolean
