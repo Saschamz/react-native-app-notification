@@ -3,7 +3,7 @@ export type ShowNotificationOptions = {
 }
 
 export type NotificationOptions = {
-  title: string
+  title?: string
   message: string
   imageUrl?: string
   onPress?: () => void

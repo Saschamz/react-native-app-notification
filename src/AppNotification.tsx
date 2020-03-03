@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AppNotificationUI from './AppNotificationUI'
-import { View, StyleProp, ViewStyle, TextStyle, ImageStyle } from 'react-native'
+import { StyleProp, ViewStyle, TextStyle, ImageStyle } from 'react-native'
+import { AppNotificationContainer } from './styled'
 import {
   NotificationQueueItem,
   ShowNotificationOptions,
@@ -26,7 +27,7 @@ export class AppNotification extends Component<Props, State> {
 
   public static ref: AppNotification = undefined
 
-  public static setRef = ref => (AppNotification.ref = ref)
+  public static setRef = (ref: AppNotification) => (AppNotification.ref = ref)
 
   public static clear = () => AppNotification.ref.clearNotifications()
 
@@ -56,7 +57,10 @@ export class AppNotification extends Component<Props, State> {
         ...notificationQueue,
         {
           ...notificationOptions,
-          onPress: () => this._onPress(id, notificationOptions.onPress),
+          onPress:
+            typeof notificationOptions.onPress === 'function'
+              ? () => this._onPress(id, notificationOptions.onPress)
+              : null,
           id
         }
       ]
@@ -96,7 +100,6 @@ export class AppNotification extends Component<Props, State> {
   }
 
   _onPress = (id: string, callback: () => void) => {
-    if (typeof callback !== 'function') return
     callback()
     this.removeNotification(id)
   }
@@ -114,9 +117,9 @@ export class AppNotification extends Component<Props, State> {
     const { notificationQueue } = this.state
 
     return (
-      <View style={contentContainerStyle}>
+      <AppNotificationContainer style={contentContainerStyle}>
         {notificationQueue.map(this.renderNotification)}
-      </View>
+      </AppNotificationContainer>
     )
   }
 }

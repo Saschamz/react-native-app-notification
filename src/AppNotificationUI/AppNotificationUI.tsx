@@ -55,7 +55,7 @@ export const AppNotificationUI: FunctionComponent<Props> = ({
             <Circle as={Image} source={{ uri: imageUrl }} style={imageStyle} />
           )}
           <TextContainer>
-            <Title style={titleStyle}>{title}</Title>
+            {title && <Title style={titleStyle}>{title}</Title>}
             <Message style={messageStyle}>{message}</Message>
           </TextContainer>
         </FlexRow>
