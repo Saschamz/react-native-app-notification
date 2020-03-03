@@ -5,11 +5,17 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "deploy": "tsc && npm publish"
   },
   "files": [
     "dist"
   ],
+  "homepage": "https://github.com/Saschamz/react-native-app-notification",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Saschamz/react-native-app-notification.git"
+  },
   "keywords": [
     "notification",
     "react-native",
@@ -21,6 +27,9 @@
     "styled-components": "*",
     "styled-native-kit": "*",
     "@redmindab/react-hooks": "*"
+  },
+  "devDependencies": {
+    "typescript": "^3.5.3"
   },
   "peerDependencies": {
     "react": "*",
