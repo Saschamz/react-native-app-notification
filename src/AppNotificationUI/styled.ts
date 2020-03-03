@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components/native'
-import { SafeAreaView, TouchableOpacity, Text, Dimensions } from 'react-native'
+import { TouchableOpacity, Text } from 'react-native'
 import { CircleView } from 'styled-native-kit'
 
 export const cardShadow = css`
@@ -8,15 +8,6 @@ export const cardShadow = css`
   shadow-opacity: 0.22;
   shadow-radius: 6px;
   elevation: 3;
-`
-
-const { height } = Dimensions.get('screen')
-
-export const Wrapper = styled(SafeAreaView)`
-  position: absolute;
-  top: ${height * 0.2};
-  left: 0;
-  right: 0;
 `
 
 export const Card = styled(TouchableOpacity)`
