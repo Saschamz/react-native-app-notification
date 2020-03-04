@@ -3,30 +3,34 @@ import {SafeAreaView, Text, TouchableOpacity, Alert} from 'react-native';
 import AppNotification from './react-native-app-notification/src';
 import {View} from 'styled-native-kit';
 
+console.disableYellowBox = true;
+
 const App = () => {
   const onPress = () => {
     AppNotification.show({
+      title: 'Title',
       message: 'Message',
       onPress: () => Alert.alert('123'),
+      animated: true,
     });
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
       <View style={{flex: 1, justifyContent: 'flex-end'}}>
         <TouchableOpacity
           onPress={onPress}
-          style={{backgroundColor: 'black', padding: 16}}>
-          <Text style={{color: 'white'}}>
-            Render react-native-app-notification
-          </Text>
+          activeOpacity={0.8}
+          style={{
+            backgroundColor: 'black',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flex: 1,
+          }}>
+          <Text style={{color: 'white'}}>Press Me</Text>
         </TouchableOpacity>
       </View>
-      <AppNotification
-        ref={AppNotification.setRef}
-        containerStyle={{backgroundColor: 'rgba(0, 0, 0, 0.8)'}}
-        messageStyle={{color: 'white'}}
-      />
+      <AppNotification />
     </SafeAreaView>
   );
 };

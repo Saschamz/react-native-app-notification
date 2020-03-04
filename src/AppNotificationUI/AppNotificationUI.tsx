@@ -1,26 +1,23 @@
 import React, { FunctionComponent } from 'react'
 import { FlexRow, View } from 'styled-native-kit'
-import {
-  Image,
-  StyleProp,
-  ViewStyle,
-  TextStyle,
-  ImageStyle
-} from 'react-native'
+import { Image } from 'react-native'
 import { useLayout } from '@redmindab/react-hooks'
 import { Card, Title, Message, TextContainer, Circle } from './styled'
-import { SlideDownFadeIn, Shrink } from './animations'
-import { NotificationQueueItem } from '../types'
+import { SlideUpFadeIn, Shrink } from './animations'
+import {
+  NotificationQueueItem,
+  AppNotificationStyleProps,
+  AppNotificationComponentProps
+} from '../types'
 
-type OwnProps = {
-  animated?: boolean
-  containerStyle?: StyleProp<ViewStyle>
-  titleStyle?: StyleProp<TextStyle>
-  messageStyle?: StyleProp<TextStyle>
-  imageStyle?: StyleProp<ImageStyle>
+type OwnProps = AppNotificationStyleProps
+
+type Props = OwnProps & NotificationQueueItem & AppNotificationComponentProps
+
+type WrapperProps = {
+  height?: number
+  reversed?: boolean
 }
-
-type Props = OwnProps & NotificationQueueItem
 
 export const AppNotificationUI: FunctionComponent<Props> = ({
   title,
@@ -32,18 +29,25 @@ export const AppNotificationUI: FunctionComponent<Props> = ({
   containerStyle,
   imageStyle,
   messageStyle,
-  titleStyle
+  titleStyle,
+  alignBottom
 }) => {
   const [layout, bindLayout] = useLayout()
 
   let AnimationWrapper = View
+  const wrapperProps: WrapperProps = {}
 
   if (animated) {
-    AnimationWrapper = animateOut ? Shrink : SlideDownFadeIn
+    AnimationWrapper = animateOut ? Shrink : SlideUpFadeIn
+    wrapperProps.height = layout.height
+
+    if (alignBottom && !animateOut) {
+      wrapperProps.reversed = true
+    }
   }
 
   return (
-    <AnimationWrapper height={layout.height}>
+    <AnimationWrapper {...wrapperProps}>
       <Card
         style={containerStyle}
         activeOpacity={onPress ? 0.7 : 1}

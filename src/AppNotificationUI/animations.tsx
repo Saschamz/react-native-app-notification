@@ -7,20 +7,22 @@ type OwnProps = {
   yOffset?: number
   delay?: number
   height?: number
+  reversed?: boolean
 }
 type Props = OwnProps
 
 export const DEFAULT_DURATION = 200
-const DEFAULT_Y_OFFSET = 48
+const DEFAULT_Y_OFFSET = -48
 
-export const SlideDownFadeIn: FunctionComponent<Props> = ({
+export const SlideUpFadeIn: FunctionComponent<Props> = ({
   children,
   delay = 0,
   duration = DEFAULT_DURATION,
-  yOffset = DEFAULT_Y_OFFSET
+  yOffset = DEFAULT_Y_OFFSET,
+  reversed
 }) => {
   const opacity = useAnimatedValue(0)
-  const translateY = useAnimatedValue(-yOffset)
+  const translateY = useAnimatedValue(reversed ? -yOffset : yOffset)
 
   useEffect(() => {
     Animated.parallel([

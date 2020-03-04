@@ -1,20 +1,14 @@
 import React, { Component } from 'react'
 import AppNotificationUI from './AppNotificationUI'
-import { StyleProp, ViewStyle, TextStyle, ImageStyle } from 'react-native'
 import { AppNotificationContainer } from './styled'
 import {
   NotificationQueueItem,
   ShowNotificationOptions,
-  NotificationOptions
+  NotificationOptions,
+  AppNotificationComponentProps
 } from './types'
 
-type OwnProps = {
-  contentContainerStyle?: StyleProp<ViewStyle>
-  containerStyle?: StyleProp<ViewStyle>
-  titleStyle?: StyleProp<TextStyle>
-  messageStyle?: StyleProp<TextStyle>
-  imageStyle?: StyleProp<ImageStyle>
-}
+type OwnProps = AppNotificationComponentProps
 
 type Props = OwnProps
 
@@ -26,8 +20,6 @@ export class AppNotification extends Component<Props, State> {
   public static DEFAULT_DURATION = 5000
 
   public static ref: AppNotification = undefined
-
-  public static setRef = (ref: AppNotification) => (AppNotification.ref = ref)
 
   public static clear = () => AppNotification.ref.clearNotifications()
 
@@ -41,15 +33,22 @@ export class AppNotification extends Component<Props, State> {
     AppNotification.ref.showNotification(options)
   }
 
+  constructor(props: Props) {
+    super(props)
+    AppNotification.ref = this
+  }
+
   state = {
     notificationQueue: []
   }
 
   public showNotification({
     duration,
+    styles,
     ...notificationOptions
   }: NotificationOptions & ShowNotificationOptions) {
     const { notificationQueue } = this.state
+    const { duration: defaultDuration } = this.props
     const id = Math.random().toString()
 
     this.setState({
@@ -57,6 +56,7 @@ export class AppNotification extends Component<Props, State> {
         ...notificationQueue,
         {
           ...notificationOptions,
+          ...styles,
           onPress:
             typeof notificationOptions.onPress === 'function'
               ? () => this._onPress(id, notificationOptions.onPress)
@@ -68,7 +68,7 @@ export class AppNotification extends Component<Props, State> {
 
     setTimeout(
       () => this.animateOutNotification(id),
-      duration || AppNotification.DEFAULT_DURATION
+      duration || defaultDuration || AppNotification.DEFAULT_DURATION
     )
   }
 
@@ -113,11 +113,21 @@ export class AppNotification extends Component<Props, State> {
   )
 
   render() {
-    const { contentContainerStyle } = this.props
+    const {
+      contentContainerStyle,
+      alignBottom,
+      bottomOffset,
+      topOffset
+    } = this.props
     const { notificationQueue } = this.state
 
     return (
-      <AppNotificationContainer style={contentContainerStyle}>
+      <AppNotificationContainer
+        style={contentContainerStyle}
+        alignBottom={alignBottom}
+        bottomOffset={bottomOffset}
+        topOffset={topOffset}
+      >
         {notificationQueue.map(this.renderNotification)}
       </AppNotificationContainer>
     )
