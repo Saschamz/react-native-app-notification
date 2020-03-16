@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import AppNotificationUI from './AppNotificationUI'
 import { AppNotificationContainer } from './styled'
 import {
-  NotificationQueueItem,
-  ShowNotificationOptions,
+  AppNotificationComponentProps,
   NotificationOptions,
-  AppNotificationComponentProps
+  NotificationQueueItem,
+  ShowNotificationOptions
 } from './types'
 
 type OwnProps = AppNotificationComponentProps
@@ -23,7 +23,9 @@ export class AppNotification extends Component<Props, State> {
 
   public static clear = () => AppNotification.ref.clearNotifications()
 
-  public static show = (options: NotificationOptions) => {
+  public static show = (
+    options: NotificationOptions & ShowNotificationOptions
+  ) => {
     if (
       typeof AppNotification.ref === 'undefined' ||
       !AppNotification.ref.showNotification
