@@ -28,7 +28,20 @@ const App = () => {
 }
 ```
 
-## Props
+## Example usage
+
+```typescript
+
+// Anywhere in the app
+AppNotification.show({
+  title: 'New message'
+  message: 'Someone sent you a message!',
+  onPress: navigateToMessages,
+})
+
+```
+
+## AppNotification Component Props
 
 | Property              | Type                  | Optional | Default                      | Description                                              |
 | --------------------- | --------------------- | -------- | ---------------------------- | -------------------------------------------------------- |
@@ -45,7 +58,7 @@ const App = () => {
 
 ## Methods
 
-| Method        | Description              |
-| ------------- | ------------------------ |
-| show(options) | Renders a notification   |
-| clear()       | Clears all notifications |
+| Method        | Description              | Props                                                                                                 |
+| ------------- | ------------------------ | ----------------------------------------------------------------------------------------------------- |
+| show(options) | Renders a notification   | title, message, imageUrl, onPress, panEnabled (and everything above except for contentContainerStyle) |
+| clear()       | Clears all notifications | none                                                                                                  |

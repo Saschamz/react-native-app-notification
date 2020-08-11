@@ -10,8 +10,7 @@ const App = () => {
     AppNotification.show({
       title: 'Title',
       message: 'Message',
-      onPress: () => Alert.alert('123'),
-      animated: true,
+      onPress: () => Alert.alert('Notification pressed!'),
     });
   };
 
@@ -27,7 +26,9 @@ const App = () => {
             alignItems: 'center',
             flex: 1,
           }}>
-          <Text style={{color: 'white'}}>Press Me</Text>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
+            Press Anywhere
+          </Text>
         </TouchableOpacity>
       </View>
       <AppNotification />

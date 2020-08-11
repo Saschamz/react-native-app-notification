@@ -20,6 +20,7 @@ export type AppNotificationComponentProps = {
   bottomOffset?: number
   alignBottom?: boolean
   animated?: boolean
+  panEnabled?: boolean
   duration?: number
 } & AppNotificationStyleProps
 
@@ -29,6 +30,7 @@ export type NotificationOptions = {
   imageUrl?: string
   onPress?: () => void
   animated?: boolean
+  panEnabled?: boolean
   styles?: AppNotificationStyleProps
 }
 
