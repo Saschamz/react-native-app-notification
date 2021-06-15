@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { StyleProp, ViewStyle, TextStyle, ImageStyle } from 'react-native'
 
 export type ShowNotificationOptions = {
@@ -22,6 +23,8 @@ export type AppNotificationComponentProps = {
   animated?: boolean
   panEnabled?: boolean
   duration?: number
+  maxAmount?: number
+  renderNotification?: (props: NotificationOptions) => ReactNode
 } & AppNotificationStyleProps
 
 export type NotificationOptions = {
@@ -32,6 +35,7 @@ export type NotificationOptions = {
   animated?: boolean
   panEnabled?: boolean
   styles?: AppNotificationStyleProps
+  data?: any
 }
 
 export type NotificationQueueItem = NotificationOptions & {

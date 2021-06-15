@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import AppNotificationUI from './AppNotificationUI'
+import AppNotificationWrapper from './AppNotificationWrapper'
 import { AppNotificationContainer } from './styled'
 import {
   AppNotificationComponentProps,
   NotificationOptions,
   NotificationQueueItem,
-  ShowNotificationOptions
+  ShowNotificationOptions,
 } from './types'
 
 type OwnProps = AppNotificationComponentProps
@@ -41,7 +42,7 @@ export class AppNotification extends Component<Props, State> {
   }
 
   state = {
-    notificationQueue: []
+    notificationQueue: [],
   }
 
   public showNotification({
@@ -50,22 +51,26 @@ export class AppNotification extends Component<Props, State> {
     ...notificationOptions
   }: NotificationOptions & ShowNotificationOptions) {
     const { notificationQueue } = this.state
-    const { duration: defaultDuration } = this.props
+    const { duration: defaultDuration, maxAmount } = this.props
     const id = Math.random().toString()
+    const newNotificationQueue = [
+      ...notificationQueue,
+      {
+        ...notificationOptions,
+        ...styles,
+        onPress:
+          typeof notificationOptions.onPress === 'function'
+            ? () => this._onPress(id, notificationOptions.onPress)
+            : null,
+        id,
+      },
+    ]
 
     this.setState({
-      notificationQueue: [
-        ...notificationQueue,
-        {
-          ...notificationOptions,
-          ...styles,
-          onPress:
-            typeof notificationOptions.onPress === 'function'
-              ? () => this._onPress(id, notificationOptions.onPress)
-              : null,
-          id
-        }
-      ]
+      notificationQueue:
+        maxAmount === undefined
+          ? newNotificationQueue
+          : newNotificationQueue.slice(newNotificationQueue.length - maxAmount),
     })
 
     setTimeout(
@@ -79,7 +84,7 @@ export class AppNotification extends Component<Props, State> {
   animateOutNotification = (id: string) => {
     const { notificationQueue } = this.state
 
-    const newQueue = notificationQueue.map(notification =>
+    const newQueue = notificationQueue.map((notification) =>
       notification.id === id
         ? { ...notification, animateOut: true }
         : notification
@@ -96,7 +101,7 @@ export class AppNotification extends Component<Props, State> {
     const { notificationQueue } = this.state
 
     const newQueue = notificationQueue.filter(
-      notification => notification.id !== id
+      (notification) => notification.id !== id
     )
     this.setState({ notificationQueue: newQueue })
   }
@@ -107,20 +112,22 @@ export class AppNotification extends Component<Props, State> {
   }
 
   renderNotification = (notification: NotificationQueueItem) => (
-    <AppNotificationUI
+    <AppNotificationWrapper
       key={notification.id}
       {...this.props}
       {...notification}
-    />
+    >
+      {this.props.renderNotification ? (
+        this.props.renderNotification(notification)
+      ) : (
+        <AppNotificationUI {...this.props} {...notification} />
+      )}
+    </AppNotificationWrapper>
   )
 
   render() {
-    const {
-      contentContainerStyle,
-      alignBottom,
-      bottomOffset,
-      topOffset
-    } = this.props
+    const { contentContainerStyle, alignBottom, bottomOffset, topOffset } =
+      this.props
     const { notificationQueue } = this.state
 
     return (
