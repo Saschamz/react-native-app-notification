@@ -47,6 +47,8 @@ AppNotification.show({
 | --------------------- | --------------------- | -------- | ---------------------------- | -------------------------------------------------------- |
 | animated              | boolean               | true     | true                         | Determines if the notification should animate in/out     |
 | duration              | number                | true     | 5000                         | Lifetime in MS                                           |
+| renderNotification    | function              | true     | undefined                    | Overrides notification renderring                        |
+| maxAmount             | number                | true     | undefined                    | Sets amount of notifications that can be active at once  |
 | alignBottom           | boolean               | true     | false                        | Renders the notifications from the bottom                |
 | bottomOffset          | number                | true     | layout.height \* 0.07        | Bottom offset                                            |
 | topOffset             | number                | true     | layout.height \* 0.07        | Top offset                                               |
