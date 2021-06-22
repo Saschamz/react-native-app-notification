@@ -19,7 +19,7 @@ export const SlideUpFadeIn: FunctionComponent<Props> = ({
   delay = 0,
   duration = DEFAULT_DURATION,
   yOffset = DEFAULT_Y_OFFSET,
-  reversed
+  reversed,
 }) => {
   const opacity = useAnimatedValue(0)
   const translateY = useAnimatedValue(reversed ? -yOffset : yOffset)
@@ -29,13 +29,15 @@ export const SlideUpFadeIn: FunctionComponent<Props> = ({
       Animated.timing(opacity, {
         toValue: 1,
         duration,
-        delay
+        delay,
+        useNativeDriver: true,
       }),
       Animated.timing(translateY, {
         toValue: 0,
         duration,
-        delay
-      })
+        delay,
+        useNativeDriver: true,
+      }),
     ]).start()
   }, [])
 
@@ -43,7 +45,7 @@ export const SlideUpFadeIn: FunctionComponent<Props> = ({
     <Animated.View
       style={{
         opacity: opacity,
-        transform: [{ translateY }]
+        transform: [{ translateY }],
       }}
     >
       {children}
@@ -55,7 +57,7 @@ export const Shrink: FunctionComponent<Props> = ({
   children,
   delay = 0,
   duration = DEFAULT_DURATION,
-  height: initialHeight
+  height: initialHeight,
 }) => {
   const scale = useAnimatedValue(1)
   const height = useAnimatedValue(initialHeight)
@@ -65,13 +67,13 @@ export const Shrink: FunctionComponent<Props> = ({
       Animated.timing(scale, {
         toValue: 0,
         duration,
-        delay
+        delay,
       }),
       Animated.timing(height, {
         toValue: 0,
         duration,
-        delay
-      })
+        delay,
+      }),
     ]).start()
   }, [])
 
@@ -79,7 +81,7 @@ export const Shrink: FunctionComponent<Props> = ({
     <Animated.View style={{ height }}>
       <Animated.View
         style={{
-          transform: [{ scale }]
+          transform: [{ scale }],
         }}
       >
         {children}

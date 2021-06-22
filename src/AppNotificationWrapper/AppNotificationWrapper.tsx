@@ -40,11 +40,13 @@ export const AppNotificationWrapper: FunctionComponent<Props> = ({
           Animated.timing(translateX, {
             toValue: dx > 0 ? screenWidth : -screenWidth,
             duration: 200,
+            useNativeDriver: true,
           }).start(() => setHide(true))
         } else {
           Animated.spring(translateX, {
             toValue: 0,
             bounciness: 10,
+            useNativeDriver: true,
           }).start()
         }
       },
