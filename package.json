@@ -19,7 +19,9 @@
   "keywords": [
     "notification",
     "react-native",
-    "toast"
+    "toast",
+    "in-app",
+    "message"
   ],
   "author": "Sascha Ringström",
   "license": "ISC",

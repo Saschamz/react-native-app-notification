@@ -1,5 +1,5 @@
-import { ReactNode } from 'react'
-import { StyleProp, ViewStyle, TextStyle, ImageStyle } from 'react-native'
+import { FunctionComponent } from 'react'
+import { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native'
 
 export type ShowNotificationOptions = {
   duration?: number
@@ -15,6 +15,11 @@ export type AppNotificationStyleProps = {
   imageStyle?: StyleProp<ImageStyle>
 }
 
+export type AnimationWrapperConfig = {
+  in?: FunctionComponent
+  out?: FunctionComponent
+}
+
 export type AppNotificationComponentProps = {
   contentContainerStyle?: StyleProp<ViewStyle>
   topOffset?: number
@@ -24,7 +29,8 @@ export type AppNotificationComponentProps = {
   panEnabled?: boolean
   duration?: number
   maxAmount?: number
-  renderNotification?: (props: NotificationOptions) => ReactNode
+  animationWrappers?: AnimationWrapperConfig
+  renderNotification?: (props: NotificationOptions) => FunctionComponent
 } & AppNotificationStyleProps
 
 export type NotificationOptions = {

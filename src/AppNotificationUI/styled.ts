@@ -14,26 +14,26 @@ export const Card = styled(TouchableOpacity)`
   background-color: white;
   ${cardShadow};
   padding: ${8 * 2}px ${8 * 1.5}px;
-  border-radius: 12;
+  border-radius: 12px;
   margin: 0 ${8 * 2}px;
   margin-bottom: ${8 / 2}px;
 `
 
 export const TextContainer = styled.View`
-  margin-left: ${8};
+  margin-left: 8px;
   width: 85%;
 `
 
 export const Title = styled(Text)`
-  font-size: 12;
+  font-size: 12px;
   text-transform: uppercase;
 `
 
 export const Message = styled(Text)`
-  font-size: 14;
-  line-height: ${14 * 1.3};
+  font-size: 14px;
+  line-height: ${14 * 1.3}px;
 `
 
 export const Circle = styled(CircleView).attrs(() => ({
-  size: 33
+  size: 33,
 }))``

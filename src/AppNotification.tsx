@@ -3,6 +3,12 @@ import AppNotificationUI from './AppNotificationUI'
 import AppNotificationWrapper from './AppNotificationWrapper'
 import { AppNotificationContainer } from './styled'
 import {
+  Shrink,
+  SlideUpFadeIn,
+  FadeIn,
+  FadeOut,
+} from './AppNotificationUI/animations'
+import {
   AppNotificationComponentProps,
   NotificationOptions,
   NotificationQueueItem,
@@ -21,6 +27,13 @@ export class AppNotification extends Component<Props, State> {
   public static DEFAULT_DURATION = 5000
 
   public static ref: AppNotification = undefined
+
+  public static AnimationWrappers = {
+    Shrink,
+    SlideUpFadeIn,
+    FadeIn,
+    FadeOut,
+  }
 
   public static clear = () => AppNotification.ref.clearNotifications()
 

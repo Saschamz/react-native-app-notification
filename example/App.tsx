@@ -10,7 +10,6 @@ const App = () => {
     AppNotification.show({
       title: 'Title',
       message: 'Message',
-      onPress: () => Alert.alert('Notification pressed!'),
     });
   };
 
@@ -31,7 +30,12 @@ const App = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <AppNotification />
+      <AppNotification
+        animationWrappers={{
+          in: AppNotification.AnimationWrappers.FadeIn,
+          out: AppNotification.AnimationWrappers.FadeOut,
+        }}
+      />
     </SafeAreaView>
   );
 };

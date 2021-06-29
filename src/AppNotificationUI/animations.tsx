@@ -89,3 +89,57 @@ export const Shrink: FunctionComponent<Props> = ({
     </Animated.View>
   )
 }
+
+export const FadeIn: FunctionComponent<Props> = ({
+  children,
+  delay = 0,
+  duration = DEFAULT_DURATION,
+}) => {
+  const opacity = useAnimatedValue(0)
+  useEffect(() => {
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration,
+      delay,
+      useNativeDriver: true,
+    }).start()
+  }, [])
+  return (
+    <Animated.View>
+      <Animated.View
+        style={{
+          opacity,
+        }}
+      >
+        {children}
+      </Animated.View>
+    </Animated.View>
+  )
+}
+
+export const FadeOut: FunctionComponent<Props> = ({
+  children,
+  delay = 0,
+  duration = DEFAULT_DURATION,
+}) => {
+  const opacity = useAnimatedValue(1)
+  useEffect(() => {
+    Animated.timing(opacity, {
+      toValue: 0,
+      duration,
+      delay,
+      useNativeDriver: true,
+    }).start()
+  }, [])
+  return (
+    <Animated.View>
+      <Animated.View
+        style={{
+          opacity,
+        }}
+      >
+        {children}
+      </Animated.View>
+    </Animated.View>
+  )
+}

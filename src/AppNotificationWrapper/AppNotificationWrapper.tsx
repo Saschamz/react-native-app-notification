@@ -24,6 +24,7 @@ export const AppNotificationWrapper: FunctionComponent<Props> = ({
   panEnabled = true,
   alignBottom,
   children,
+  animationWrappers = { in: undefined, out: undefined },
 }) => {
   const [hide, setHide] = useState(false)
   const [layout, bindLayout] = useLayout()
@@ -67,7 +68,10 @@ export const AppNotificationWrapper: FunctionComponent<Props> = ({
       }
     }
 
-    AnimationWrapper = animateOut ? Shrink : SlideUpFadeIn
+    const outAnimation = animationWrappers.out || Shrink
+    const inAnimation = animationWrappers.in || SlideUpFadeIn
+
+    AnimationWrapper = animateOut ? outAnimation : inAnimation
     wrapperProps.height = layout.height
 
     if (hide) {

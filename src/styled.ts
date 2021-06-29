@@ -7,9 +7,10 @@ export const AppNotificationContainer = styled.SafeAreaView`
   position: absolute;
   left: 0;
   right: 0;
+  z-index: 100;
 
-  ${props =>
-    props.alignBottom
-      ? `bottom: ${props.bottomOffset || height * 0.07}`
-      : `top: ${props.topOffset || height * 0.07}`};
+  ${({ alignBottom, bottomOffset, topOffset }) =>
+    alignBottom
+      ? `bottom: ${bottomOffset || Math.round(height * 0.07)}px`
+      : `top: ${topOffset || Math.round(height * 0.07)}px`};
 `
