@@ -55,7 +55,7 @@ export const AppNotificationWrapper: FunctionComponent<Props> = ({
       onPanResponderRelease: (e, { vx, dx }) => {
         const hasTapped = vx + dx === 0;
         if (onPress && !panEnabled && hasTapped) {
-          touchableProps.onPress = onPress();
+          touchableProps.onPress = onPress;
           touchableProps.activeOpacity = 0.7;
         }
         const screenWidth = Dimensions.get("window").width;
