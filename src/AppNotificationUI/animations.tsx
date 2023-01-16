@@ -8,6 +8,7 @@ type OwnProps = {
   delay?: number
   height?: number
   reversed?: boolean
+  children?: JSX.Element
 }
 type Props = OwnProps
 

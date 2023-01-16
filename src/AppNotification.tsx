@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
 import AppNotificationUI from './AppNotificationUI'
+import { FadeIn, FadeOut, Shrink, SlideUpFadeIn } from './AppNotificationUI/animations'
 import AppNotificationWrapper from './AppNotificationWrapper'
 import { AppNotificationContainer } from './styled'
-import {
-  Shrink,
-  SlideUpFadeIn,
-  FadeIn,
-  FadeOut,
-} from './AppNotificationUI/animations'
 import {
   AppNotificationComponentProps,
   NotificationOptions,
@@ -37,13 +32,8 @@ export class AppNotification extends Component<Props, State> {
 
   public static clear = () => AppNotification.ref.clearNotifications()
 
-  public static show = (
-    options: NotificationOptions & ShowNotificationOptions
-  ) => {
-    if (
-      typeof AppNotification.ref === 'undefined' ||
-      !AppNotification.ref.showNotification
-    ) {
+  public static show = (options: NotificationOptions & ShowNotificationOptions) => {
+    if (typeof AppNotification.ref === 'undefined' || !AppNotification.ref.showNotification) {
       return console.warn('notificationRef is undefined')
     }
     AppNotification.ref.showNotification(options)
@@ -97,25 +87,18 @@ export class AppNotification extends Component<Props, State> {
   animateOutNotification = (id: string) => {
     const { notificationQueue } = this.state
 
-    const newQueue = notificationQueue.map((notification) =>
-      notification.id === id
-        ? { ...notification, animateOut: true }
-        : notification
+    const newQueue = notificationQueue.map(notification =>
+      notification.id === id ? { ...notification, animateOut: true } : notification
     )
 
     this.setState({ notificationQueue: newQueue })
-    setTimeout(
-      () => this.removeNotification(id),
-      AppNotification.DEFAULT_DURATION
-    )
+    setTimeout(() => this.removeNotification(id), AppNotification.DEFAULT_DURATION)
   }
 
   removeNotification = (id: string) => {
     const { notificationQueue } = this.state
 
-    const newQueue = notificationQueue.filter(
-      (notification) => notification.id !== id
-    )
+    const newQueue = notificationQueue.filter(notification => notification.id !== id)
     this.setState({ notificationQueue: newQueue })
   }
 
@@ -125,11 +108,7 @@ export class AppNotification extends Component<Props, State> {
   }
 
   renderNotification = (notification: NotificationQueueItem) => (
-    <AppNotificationWrapper
-      key={notification.id}
-      {...this.props}
-      {...notification}
-    >
+    <AppNotificationWrapper key={notification.id} {...this.props} {...notification}>
       {this.props.renderNotification ? (
         this.props.renderNotification(notification)
       ) : (
@@ -139,8 +118,7 @@ export class AppNotification extends Component<Props, State> {
   )
 
   render() {
-    const { contentContainerStyle, alignBottom, bottomOffset, topOffset } =
-      this.props
+    const { contentContainerStyle, alignBottom, bottomOffset, topOffset } = this.props
     const { notificationQueue } = this.state
 
     return (

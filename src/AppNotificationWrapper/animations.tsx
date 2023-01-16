@@ -2,14 +2,14 @@ import { useAnimatedValue } from '@redmindab/react-hooks'
 import React, { FunctionComponent, useEffect } from 'react'
 import { Animated } from 'react-native'
 
-type OwnProps = {
+type Props = {
   duration?: number
   yOffset?: number
   delay?: number
   height?: number
   reversed?: boolean
+  children?: JSX.Element
 }
-type Props = OwnProps
 
 export const DEFAULT_DURATION = 200
 const DEFAULT_Y_OFFSET = -48

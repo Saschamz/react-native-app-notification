@@ -1,5 +1,5 @@
 import { useAnimatedValue, useLayout } from '@redmindab/react-hooks'
-import React, { Fragment, FunctionComponent, useRef, useState } from 'react'
+import React, { FunctionComponent, useRef, useState } from 'react'
 import { Animated, Dimensions, PanResponder } from 'react-native'
 import { View } from 'styled-native-kit'
 import {
@@ -9,7 +9,7 @@ import {
 } from '../types'
 import { Shrink, SlideUpFadeIn } from './animations'
 
-type OwnProps = AppNotificationStyleProps
+type OwnProps = AppNotificationStyleProps & { children?: Element }
 
 type Props = OwnProps & NotificationQueueItem & AppNotificationComponentProps
 
@@ -54,7 +54,7 @@ export const AppNotificationWrapper: FunctionComponent<Props> = ({
     })
   ).current
 
-  let PanWrapper = Fragment
+  let PanWrapper = Animated.View
   let panWrapperProps = {}
   let AnimationWrapper = View
   const wrapperProps: WrapperProps = {}
