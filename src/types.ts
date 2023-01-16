@@ -42,6 +42,8 @@ export type NotificationOptions = {
   panEnabled?: boolean
   styles?: AppNotificationStyleProps
   data?: any
+  left?: JSX.Element
+  right?: JSX.Element
 }
 
 export type NotificationQueueItem = NotificationOptions & {

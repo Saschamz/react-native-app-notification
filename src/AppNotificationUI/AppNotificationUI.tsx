@@ -1,12 +1,19 @@
 import React, { FunctionComponent } from 'react'
-import { Image } from 'react-native'
 import { FlexRow } from 'styled-native-kit'
 import {
   AppNotificationComponentProps,
   AppNotificationStyleProps,
   NotificationQueueItem,
 } from '../types'
-import { Card, Circle, Message, TextContainer, Title } from './styled'
+import {
+  BaseImage,
+  Card,
+  LeftContainer,
+  Message,
+  RightContainer,
+  TextContainer,
+  Title,
+} from './styled'
 
 type OwnProps = AppNotificationStyleProps
 
@@ -21,23 +28,19 @@ export const AppNotificationUI: FunctionComponent<Props> = ({
   imageStyle,
   messageStyle,
   titleStyle,
+  left,
+  right,
 }) => {
   return (
-    <Card
-      style={containerStyle}
-      activeOpacity={onPress ? 0.7 : 1}
-      onPress={onPress}
-    >
-      <FlexRow style={{ alignItems: 'flex-start' }}>
-        {imageUrl && (
-          <Circle as={Image} source={{ uri: imageUrl }} style={imageStyle} />
-        )}
+    <Card style={containerStyle} activeOpacity={onPress ? 0.7 : 1} onPress={onPress}>
+      <FlexRow style={{ alignItems: 'center', justifyContent: 'center' }}>
+        {left && <LeftContainer>{left}</LeftContainer>}
+        {imageUrl && <BaseImage source={{ uri: imageUrl }} style={imageStyle} />}
         <TextContainer>
-          {title && (
-            <Title style={[{ marginBottom: 4 }, titleStyle]}>{title}</Title>
-          )}
+          {title && <Title style={[{ marginBottom: 4 }, titleStyle]}>{title}</Title>}
           <Message style={messageStyle}>{message}</Message>
         </TextContainer>
+        {right && <RightContainer>{right}</RightContainer>}
       </FlexRow>
     </Card>
   )

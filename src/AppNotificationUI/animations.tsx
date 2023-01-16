@@ -1,6 +1,6 @@
+import { useAnimatedValue } from '@redmindab/react-hooks'
 import React, { FunctionComponent, useEffect } from 'react'
 import { Animated } from 'react-native'
-import { useAnimatedValue } from '@redmindab/react-hooks'
 
 type OwnProps = {
   duration?: number
@@ -68,11 +68,13 @@ export const Shrink: FunctionComponent<Props> = ({
         toValue: 0,
         duration,
         delay,
+        useNativeDriver: true,
       }),
       Animated.timing(height, {
         toValue: 0,
         duration,
         delay,
+        useNativeDriver: false,
       }),
     ]).start()
   }, [])
