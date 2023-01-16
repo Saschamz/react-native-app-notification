@@ -13,7 +13,7 @@
 
 ## Setup
 
-Inside of `App.js`
+Inside of `App.tsx`
 
 ```typescript
 import AppNotification from 'react-native-app-notification'
@@ -28,7 +28,7 @@ const App = () => {
 }
 ```
 
-## Example usage
+## Example
 
 ```typescript
 
@@ -39,7 +39,17 @@ AppNotification.show({
   onPress: navigateToMessages,
 })
 
+// You can inject your own components to extend it further
+AppNotification.show({
+  title: 'New message'
+  message: 'Someone sent you a message!',
+  left: <NotificationIcon />,
+  right: <ShowButton />,
+})
+
 ```
+
+![A gif showing react-native-app-notification](https://imgur.com/a/p8SMW6Z)
 
 ## AppNotification Component Props
 
@@ -60,7 +70,7 @@ AppNotification.show({
 
 ## Methods
 
-| Method        | Description              | Props                                                                                                 |
-| ------------- | ------------------------ | ----------------------------------------------------------------------------------------------------- |
-| show(options) | Renders a notification   | title, message, imageUrl, onPress, panEnabled (and everything above except for contentContainerStyle) |
-| clear()       | Clears all notifications | none                                                                                                  |
+| Method        | Description              | Props                                                                                                              |
+| ------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| show(options) | Renders a notification   | title, message, imageUrl, onPress, panEnabled, left, right (and everything above except for contentContainerStyle) |
+| clear()       | Clears all notifications | none                                                                                                               |
