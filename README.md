@@ -49,7 +49,7 @@ AppNotification.show({
 
 ```
 
-![A gif showing react-native-app-notification](https://imgur.com/a/p8SMW6Z)
+![A gif showing react-native-app-notification](https://imgur.com/ziT0s5X)
 
 ## AppNotification Component Props
 
