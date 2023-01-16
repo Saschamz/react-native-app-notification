@@ -1,5 +1,7 @@
 # react-native-app-notification
 
+![A gif showing react-native-app-notification](https://imgur.com/ziT0s5X.gif)
+
 ## Content
 
 - [Installation](#installation)
@@ -48,8 +50,6 @@ AppNotification.show({
 })
 
 ```
-
-![A gif showing react-native-app-notification](https://imgur.com/ziT0s5X.gif)
 
 ## AppNotification Component Props
 
