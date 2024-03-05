@@ -1,6 +1,6 @@
-import { useAnimatedValue } from '@redmindab/react-hooks'
 import React, { FunctionComponent, useEffect } from 'react'
 import { Animated } from 'react-native'
+import useAnimatedValue from '../hooks/useAnimatedValue'
 
 type OwnProps = {
   duration?: number

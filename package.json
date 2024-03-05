@@ -26,7 +26,6 @@
   "author": "Sascha Ringström",
   "license": "ISC",
   "dependencies": {
-    "@redmindab/react-hooks": "*",
     "styled-components": "*",
     "styled-native-kit": "*"
   },

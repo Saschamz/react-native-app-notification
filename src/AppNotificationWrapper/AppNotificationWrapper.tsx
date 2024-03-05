@@ -1,7 +1,8 @@
-import { useAnimatedValue, useLayout } from '@redmindab/react-hooks'
 import React, { FunctionComponent, useRef, useState } from 'react'
 import { Animated, Dimensions, PanResponder } from 'react-native'
 import { View } from 'styled-native-kit'
+import useAnimatedValue from '../hooks/useAnimatedValue'
+import useLayout from '../hooks/useLayout'
 import {
   AppNotificationComponentProps,
   AppNotificationStyleProps,
@@ -51,7 +52,7 @@ export const AppNotificationWrapper: FunctionComponent<Props> = ({
           }).start()
         }
       },
-    })
+    }),
   ).current
 
   let PanWrapper = Animated.View
