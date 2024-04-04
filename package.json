@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "deploy": "tsc && npm publish"
+    "build": "tsc --noEmit",
+    "deploy": "npm run build && npm publish"
   },
   "files": [
     "dist"
