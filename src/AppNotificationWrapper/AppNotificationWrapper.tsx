@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useRef, useState } from 'react'
-import { Animated, Dimensions, PanResponder } from 'react-native'
-import { View } from 'styled-native-kit'
+import { Animated, Dimensions, PanResponder, View } from 'react-native'
 import useAnimatedValue from '../hooks/useAnimatedValue'
 import useLayout from '../hooks/useLayout'
 import {
@@ -23,6 +22,7 @@ export const AppNotificationWrapper: FunctionComponent<Props> = ({
   animateOut,
   animated = true,
   panEnabled = true,
+  onPress,
   alignBottom,
   children,
   animationWrappers = { in: undefined, out: undefined },
@@ -36,8 +36,12 @@ export const AppNotificationWrapper: FunctionComponent<Props> = ({
       onPanResponderMove: (e, { dx }) => {
         translateX.setValue(dx)
       },
+      onPanResponderStart: (e, {}) => {},
       onPanResponderRelease: (e, { vx, dx }) => {
         const screenWidth = Dimensions.get('window').width
+
+        if (Math.abs(dx) < 0.1 * screenWidth) onPress?.()
+
         if (Math.abs(vx) >= 0.5 || Math.abs(dx) >= 0.5 * screenWidth) {
           Animated.timing(translateX, {
             toValue: dx > 0 ? screenWidth : -screenWidth,

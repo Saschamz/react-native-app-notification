@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { FlexRow } from 'styled-native-kit'
+import { View } from 'react-native'
 import {
   AppNotificationComponentProps,
   AppNotificationStyleProps,
@@ -24,6 +24,7 @@ export const AppNotificationUI: FunctionComponent<Props> = ({
   message,
   imageUrl,
   onPress,
+  panEnabled,
   containerStyle,
   imageStyle,
   messageStyle,
@@ -32,8 +33,8 @@ export const AppNotificationUI: FunctionComponent<Props> = ({
   right,
 }) => {
   return (
-    <Card style={containerStyle} activeOpacity={onPress ? 0.7 : 1} onPress={onPress}>
-      <FlexRow style={{ alignItems: 'center', justifyContent: 'center' }}>
+    <Card style={containerStyle} activeOpacity={onPress || panEnabled ? 0.7 : 1} onPress={onPress}>
+      <View style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
         {left && <LeftContainer>{left}</LeftContainer>}
         {imageUrl && <BaseImage source={{ uri: imageUrl }} style={imageStyle} />}
         <TextContainer>
@@ -41,7 +42,7 @@ export const AppNotificationUI: FunctionComponent<Props> = ({
           <Message style={messageStyle}>{message}</Message>
         </TextContainer>
         {right && <RightContainer>{right}</RightContainer>}
-      </FlexRow>
+      </View>
     </Card>
   )
 }

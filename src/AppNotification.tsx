@@ -78,7 +78,7 @@ export class AppNotification extends Component<Props, State> {
 
     setTimeout(
       () => this.animateOutNotification(id),
-      duration || defaultDuration || AppNotification.DEFAULT_DURATION
+      duration || defaultDuration || AppNotification.DEFAULT_DURATION,
     )
   }
 
@@ -88,7 +88,7 @@ export class AppNotification extends Component<Props, State> {
     const { notificationQueue } = this.state
 
     const newQueue = notificationQueue.map(notification =>
-      notification.id === id ? { ...notification, animateOut: true } : notification
+      notification.id === id ? { ...notification, animateOut: true } : notification,
     )
 
     this.setState({ notificationQueue: newQueue })
@@ -112,7 +112,11 @@ export class AppNotification extends Component<Props, State> {
       {this.props.renderNotification ? (
         this.props.renderNotification(notification)
       ) : (
-        <AppNotificationUI {...this.props} {...notification} />
+        <AppNotificationUI
+          {...this.props}
+          {...notification}
+          onPress={notification.panEnabled ? undefined : notification.onPress}
+        />
       )}
     </AppNotificationWrapper>
   )

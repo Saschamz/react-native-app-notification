@@ -26,8 +26,7 @@
   "author": "Sascha Ringström",
   "license": "ISC",
   "dependencies": {
-    "styled-components": "*",
-    "styled-native-kit": "*"
+    "styled-components": "*"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
