@@ -30,7 +30,7 @@ export type AppNotificationComponentProps = {
   duration?: number
   maxAmount?: number
   animationWrappers?: AnimationWrapperConfig
-  renderNotification?: (props: NotificationOptions) => FunctionComponent
+  renderNotification?: (props: RenderNotificationProps) => JSX.Element
 } & AppNotificationStyleProps
 
 export type NotificationOptions = {
@@ -44,6 +44,10 @@ export type NotificationOptions = {
   data?: any
   left?: JSX.Element
   right?: JSX.Element
+}
+
+export type RenderNotificationProps = NotificationOptions & {
+  close(): void
 }
 
 export type NotificationQueueItem = NotificationOptions & {

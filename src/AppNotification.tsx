@@ -110,7 +110,10 @@ export class AppNotification extends Component<Props, State> {
   renderNotification = (notification: NotificationQueueItem) => (
     <AppNotificationWrapper key={notification.id} {...this.props} {...notification}>
       {this.props.renderNotification ? (
-        this.props.renderNotification(notification)
+        this.props.renderNotification({
+          ...notification,
+          close: () => this.removeNotification(notification.id),
+        })
       ) : (
         <AppNotificationUI
           {...this.props}
