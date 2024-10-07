@@ -6,6 +6,7 @@ export type ShowNotificationOptions = {
   topOffset?: number
   bottomOffset?: number
   alignBottom?: number
+  id?: string
 }
 
 export type AppNotificationStyleProps = {
@@ -29,6 +30,7 @@ export type AppNotificationComponentProps = {
   panEnabled?: boolean
   duration?: number
   maxAmount?: number
+  id?: string
   animationWrappers?: AnimationWrapperConfig
   renderNotification?: (props: RenderNotificationProps) => JSX.Element
 } & AppNotificationStyleProps

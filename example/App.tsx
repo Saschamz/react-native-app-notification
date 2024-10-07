@@ -1,4 +1,4 @@
-import { Alert, SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { Alert, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 import { useRef } from 'react'
 import AppNotification from './react-native-app-notification/src'
@@ -33,9 +33,11 @@ export default function App() {
 
   const onPress = () => {
     if (indexRef.current === notifications.length) indexRef.current = 0
-    const options = notifications[indexRef.current++]
 
-    AppNotification.show({ duration: 1000 * 3, ...options })
+    const options = notifications[indexRef.current++]
+    const id = Math.random() >= 0.5 ? 'toast' : undefined
+
+    AppNotification.show({ duration: 1000 * 3, id, ...options })
   }
 
   return (
@@ -52,12 +54,30 @@ export default function App() {
       >
         <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 20 }}>Press Anywhere</Text>
       </TouchableOpacity>
+      <AppNotification />
       <AppNotification
-      // Add custom animations!
-      // animationWrappers={{
-      //   in: AppNotification.AnimationWrappers.FadeIn,
-      //   out: AppNotification.AnimationWrappers.FadeOut,
-      // }}
+        id="toast"
+        alignBottom
+        maxAmount={1}
+        animationWrappers={{
+          in: AppNotification.AnimationWrappers.FadeIn,
+          out: AppNotification.AnimationWrappers.FadeOut,
+        }}
+        renderNotification={notification => {
+          return (
+            <View
+              style={{
+                backgroundColor: 'white',
+                paddingHorizontal: 24,
+                paddingVertical: 12,
+                borderRadius: 100,
+                marginHorizontal: 16,
+              }}
+            >
+              <Text>{notification.message}</Text>
+            </View>
+          )
+        }}
       />
     </SafeAreaView>
   )

@@ -10,9 +10,7 @@ import {
   ShowNotificationOptions,
 } from './types'
 
-type OwnProps = AppNotificationComponentProps
-
-type Props = OwnProps
+type Props = AppNotificationComponentProps
 
 type State = {
   notificationQueue: NotificationQueueItem[]
@@ -21,7 +19,11 @@ type State = {
 export class AppNotification extends Component<Props, State> {
   public static DEFAULT_DURATION = 5000
 
-  public static ref: AppNotification = undefined
+  public static refs: Map<string, AppNotification> = new Map()
+
+  public readonly id: string
+
+  private static readonly _defaultId = 'AppNotificationDefaultIdentifier' as const
 
   public static AnimationWrappers = {
     Shrink,
@@ -30,18 +32,33 @@ export class AppNotification extends Component<Props, State> {
     FadeOut,
   }
 
-  public static clear = () => AppNotification.ref.clearNotifications()
+  public static clear = (id?: string): void => {
+    if (id) this.getRef(id)?.clearNotifications()
+    else AppNotification.refs.forEach(ref => ref.clearNotifications())
+  }
+
+  private static getRef = (
+    id: string = AppNotification._defaultId,
+  ): AppNotification | undefined => {
+    return AppNotification.refs.get(id) ?? AppNotification.refs.values().next().value
+  }
 
   public static show = (options: NotificationOptions & ShowNotificationOptions) => {
-    if (typeof AppNotification.ref === 'undefined' || !AppNotification.ref.showNotification) {
-      return console.warn('notificationRef is undefined')
-    }
-    AppNotification.ref.showNotification(options)
+    const ref = this.getRef(options.id)
+
+    if (!ref) return console.warn('notificationRef is undefined')
+
+    return ref.showNotification(options)
   }
 
   constructor(props: Props) {
     super(props)
-    AppNotification.ref = this
+    this.id = props.id ?? AppNotification._defaultId
+    AppNotification.refs.set(this.id, this)
+  }
+
+  componentWillUnmount(): void {
+    AppNotification.refs.delete(this.id)
   }
 
   state = {
