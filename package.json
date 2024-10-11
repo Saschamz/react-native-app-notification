@@ -1,6 +1,6 @@
 {
   "name": "react-native-app-notification",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "In-app custom notifications for React-Native",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
