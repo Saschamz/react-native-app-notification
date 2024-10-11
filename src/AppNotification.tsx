@@ -33,7 +33,7 @@ export class AppNotification extends Component<Props, State> {
   }
 
   public static clear = (id?: string): void => {
-    if (id) this.getRef(id)?.clearNotifications()
+    if (id) AppNotification.getRef(id)?.clearNotifications()
     else AppNotification.refs.forEach(ref => ref.clearNotifications())
   }
 
@@ -44,7 +44,7 @@ export class AppNotification extends Component<Props, State> {
   }
 
   public static show = (options: NotificationOptions & ShowNotificationOptions) => {
-    const ref = this.getRef(options.id)
+    const ref = AppNotification.getRef(options.id)
 
     if (!ref) return console.warn('notificationRef is undefined')
 
